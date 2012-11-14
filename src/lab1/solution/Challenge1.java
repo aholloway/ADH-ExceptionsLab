@@ -16,7 +16,9 @@ import javax.swing.JOptionPane;
  */
 public class Challenge1 {
 
-    private static final int LAST_NAME_IDX = 1;
+    //not needed.  Occasionally the last name will not be the second 
+    // entry in the name.
+    //private static final int LAST_NAME_IDX = 1;
 
     public static void main(String[] args) {
         Challenge1 app = new Challenge1();
@@ -48,6 +50,10 @@ public class Challenge1 {
 
     public String extractLastName(String fullName) throws IndexOutOfBoundsException{
         String[] nameParts = fullName.split(" ");
-        return nameParts[LAST_NAME_IDX];
+        int lastNameIndex=nameParts.length-1;
+        if (lastNameIndex==0){
+            throw new IndexOutOfBoundsException("");
+        }
+        return nameParts[lastNameIndex];
     }
 }

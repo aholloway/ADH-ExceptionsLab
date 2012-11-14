@@ -18,6 +18,19 @@ import java.util.Date;
  * @version 1.00
  */
 
+
+/**
+ * Employee stores information about an employee including 
+ * firstName - employee's first name
+ * lastName - employee's last name
+ * ssn - employee's social security number
+ * hireDate - employee's date of hire
+ * daysVacation - integer value that holds number of vacation days that the
+ *  employee gets per year.
+ * 
+ * @author aholloway
+ * @version 1.01
+ */
 public class Employee {
 
     public static final int MAX_VACATION_DAYS = 28;
@@ -28,6 +41,11 @@ public class Employee {
     private Date hireDate;
     private int daysVacation;
 
+    /**
+     * Overwritten default constructor for Employee takes no parameters.
+     * This method creates an employee with "Unknown" for firstName, lastName,
+     * and ssn, a hireDate of today and 0 vacation days.
+     */
     public Employee() {
         firstName = "Unknown";
         lastName = "Unknown";
@@ -36,6 +54,14 @@ public class Employee {
         daysVacation = 0;
     }
 
+    /**
+     * Constructor for Employee that takes five parameters.
+     * @param firstName
+     * @param lastName
+     * @param ssn
+     * @param hireDate
+     * @param daysVacation 
+     */
     public Employee(String firstName, String lastName, String ssn, Date hireDate, int daysVacation) {
         try {
             setFirstName(firstName);

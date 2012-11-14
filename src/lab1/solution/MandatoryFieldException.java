@@ -5,7 +5,7 @@
 package lab1.solution;
 
 /**
- *
+ * added based on class question.  Not really part of lab1 solution.
  * @author aholloway
  */
 public class MandatoryFieldException extends IllegalArgumentException {
