@@ -12,13 +12,16 @@ import java.util.Date;
 public class StartUp {
     public static void main(String[] args) {
         
+        //int x= 0044404;
+        //System.out.println(x);
+        
         String firstName="";
         String lastName= null;
-        String ssn=null;
+        String ssn="111111111";
                
         Calendar cal = Calendar.getInstance();
                 
-        cal.set(1899, Calendar.DECEMBER, 31);
+        cal.set(2012, Calendar.DECEMBER, 31);
         
         Date date = cal.getTime();
         

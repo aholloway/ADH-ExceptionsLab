@@ -1,23 +1,20 @@
 package lab0.solution;
 
-import lab0.*;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * In this challenge you need to address the probability that at some point the
- * arguments to method parameters may not be valid. <p> For example, String
- * arguments may be null or empty; other objects may be null; or primitive
- * numbers may be out of acceptable range. <p> You need to validate ALL method
- * parameters to make sure any and all arguments are valid. The only exception
- * is when any argument is acceptable based on requirements. Fix the code below
- * using if logic to validate method arguments and throw
- * IllegalArgumentException or a custom exception if the validation fails.
- *
- * @author Jim Lombardo, jlombardo@wctc.edu
- * @version 1.00
- */
 
+/**
+ * This class is a simulation of a real world employee that manages
+ * information about that employee.  (Not every class is a simulation - like
+ * a primary number generator would not be a simulation).  Add any information
+ * about the class that other programmers might want to know.  
+ * 
+ * CAUTION: this is a first draft and is likely to change.
+ * author tag and version
+ * @author Drew Holloway aholloway@mywctc.edu
+ * @version 1.01
+ */
 
 /**
  * Employee stores information about an employee including 
@@ -33,18 +30,25 @@ import java.util.Date;
  */
 public class Employee {
 
+    /** Global constant for maximum allowed vacation days */
     public static final int MAX_VACATION_DAYS = 28;
+    
     public static final int MIN_VACATION_DAYS = 0;
     private String firstName;
     private String lastName;
     private String ssn;
     private Date hireDate;
     private int daysVacation;
+    private String[] badSsn = {
+        "000000000", "111111111", "222222222", "333333333", 
+        "444444444", "555555555", "666666666", "777777777",
+        "888888888", "999999999", "123456789", "987654321"
+    };
 
     /**
-     * Overwritten default constructor for Employee takes no parameters.
-     * This method creates an employee with "Unknown" for firstName, lastName,
-     * and ssn, a hireDate of today and 0 vacation days.
+     * Default constructor.
+     * 
+     * Don't explain the how, just what it does.
      */
     public Employee() {
         firstName = "Unknown";
@@ -55,12 +59,12 @@ public class Employee {
     }
 
     /**
-     * Constructor for Employee that takes five parameters.
-     * @param firstName
-     * @param lastName
-     * @param ssn
-     * @param hireDate
-     * @param daysVacation 
+     * Custom, convenience constructor that accepts all properties
+     * @param firstName - cannot be null or empty
+     * @param lastName - cannot be null or empty
+     * @param ssn - must be valid
+     * @param hireDate - must be within acceptable range
+     * @param daysVacation - must be within acceptable range
      */
     public Employee(String firstName, String lastName, String ssn, Date hireDate, int daysVacation) {
         try {
@@ -95,12 +99,12 @@ public class Employee {
     }
 
     /**
-     * Sets the number of vacation days
+     * Sets vacation days allowed.
      * 
      * @param daysVacation
      * @throws IllegalArgumentException if value not in proper range
      */
-    public void setDaysVacation(int daysVacation) throws IllegalArgumentException {
+    public final void setDaysVacation(int daysVacation) throws IllegalArgumentException {
         // if null or empty, throw illegal argument exception
         if (daysVacation<MIN_VACATION_DAYS){
             throw new IllegalArgumentException("Vacation days may not be less than "
@@ -122,14 +126,15 @@ public class Employee {
      * @param firstName
      * @throws IllegalArgumentException 
      */
-    public void setFirstName(String firstName) throws IllegalArgumentException {
+    public final void setFirstName(String firstName) throws IllegalArgumentException {
         // if null or empty, throw illegal argument exception
-        if (firstName==""){
-            throw new IllegalArgumentException("firstName may not be empty");
-        }
         if (firstName==null){
             throw new IllegalArgumentException("firstName may not be null");
         }
+        if (firstName.equals("")){
+            throw new IllegalArgumentException("firstName may not be empty");
+        }
+        
         this.firstName = firstName;
     }
 
@@ -137,8 +142,17 @@ public class Employee {
         return hireDate;
     }
 
-    public void setHireDate(Date hireDate) throws IllegalArgumentException {
-        // if null or empty, throw illegal argument exception
+    public final void setHireDate(Date hireDate) throws IllegalArgumentException {
+        // if null throw illegal argument exception
+        if (hireDate==null){
+            throw new IllegalArgumentException("Hire date may not be null.");
+        }
+        Date today = new Date();
+        if (hireDate.after(today)){
+             throw new IllegalArgumentException("Hire date may not be after "
+                     + "today.");
+        }
+        
         Calendar cal = Calendar.getInstance();
                 
         cal.set(1900, Calendar.JANUARY, 1);
@@ -156,14 +170,15 @@ public class Employee {
         return lastName;
     }
 
-    public void setLastName(String lastName) throws IllegalArgumentException {
+    public final void setLastName(String lastName) throws IllegalArgumentException {
         // if null or empty, throw illegal argument exception
-        if (lastName==""){
-            throw new IllegalArgumentException("lastName may not be empty");
-        }
         if (lastName==null){
             throw new IllegalArgumentException("lastName may not be null");
         }
+        if (lastName.equals("")){
+            throw new IllegalArgumentException("lastName may not be empty");
+        }
+        
         this.lastName = lastName;
     }
 
@@ -171,14 +186,28 @@ public class Employee {
         return ssn;
     }
 
-    public void setSsn(String ssn) throws IllegalArgumentException {
+    public final void setSsn(String ssn) throws IllegalArgumentException {
         // if null or empty, throw illegal argument exception
-        if (ssn==""){
-            throw new IllegalArgumentException("ssn may not be empty");
-        }
         if (ssn==null){
             throw new IllegalArgumentException("ssn may not be null");
         }
+        if (ssn.length()!=9){
+            throw new IllegalArgumentException("ssn must be of lenght nine.");
+        }
+        
+        for (String value : badSsn){
+            if (value.equals(ssn)){
+                throw new IllegalArgumentException("Illegal SSN value");
+            }
+        }
+        
+        char[] chars = ssn.toCharArray();
+        for (char c : chars){
+            if(!(Character.isDigit(c))){
+                throw new IllegalArgumentException("must be all digits");
+            }
+        }
+        
         this.ssn = ssn;
     }
 }
