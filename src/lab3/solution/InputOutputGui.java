@@ -33,7 +33,7 @@ public class InputOutputGui {
             } catch (NullPointerException npe) {
                 System.out.println("Cancelled...");
                 System.exit(0);
-            } catch (IndexOutOfBoundsException e) {
+            } catch (InvalidNameException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error",
                         JOptionPane.ERROR_MESSAGE);
             }

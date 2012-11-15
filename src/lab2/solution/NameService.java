@@ -28,6 +28,10 @@ public class NameService {
         if (fullName == null) {
             throw new NullPointerException("Full name was null.");
         }
+        if (fullName.length()==0||fullName.charAt(0)==' '){
+            throw new IndexOutOfBoundsException("Name cannot be empty or "
+                    + "begin with a space.");
+        }
         String[] nameParts = fullName.split(" ");
         int namePartsIndex = nameParts.length - 1;
         // if nameParts has length 0 throw an exception 
@@ -50,6 +54,10 @@ public class NameService {
         // check that name is not null
         if (fullName == null) {
             throw new NullPointerException("Full name was null.");
+        }
+        if (fullName.length()==0||fullName.charAt(0)==' '){
+            throw new IndexOutOfBoundsException("Name cannot be empty or "
+                    + "begin with a space.");
         }
         String[] nameParts = fullName.split(" ");
         int namePartsIndex = nameParts.length - 1;

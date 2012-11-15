@@ -24,16 +24,20 @@ public class NameService {
      * @return the last name
      */
     public String extractLastName(String fullName) throws NullPointerException,
-            IndexOutOfBoundsException {
+            InvalidNameException {
         // check that name is not null
         if (fullName == null) {
             throw new NullPointerException("Full name was null.");
+        }
+        if (fullName.length()==0||fullName.charAt(0)==' '){
+            throw new IndexOutOfBoundsException("Name cannot be empty or "
+                    + "begin with a space.");
         }
         String[] nameParts = fullName.split(" ");
         int namePartsIndex = nameParts.length - 1;
         // if nameParts has length 0 throw an exception 
         if (namePartsIndex == 0) {
-            throw new IndexOutOfBoundsException("Name must have a space.");
+            throw new InvalidNameException("Name must have a space.");
         }
         
         return nameParts[namePartsIndex];
@@ -47,16 +51,20 @@ public class NameService {
      * @return the first name
      */
     public String extractFirstName(String fullName) throws NullPointerException,
-            IndexOutOfBoundsException {
+            InvalidNameException {
         // check that name is not null
         if (fullName == null) {
             throw new NullPointerException("Full name was null.");
+        }
+        if (fullName.length()==0||fullName.charAt(0)==' '){
+            throw new IndexOutOfBoundsException("Name cannot be empty or "
+                    + "begin with a space.");
         }
         String[] nameParts = fullName.split(" ");
         int namePartsIndex = nameParts.length - 1;
         // if nameParts has length 0 throw an exception 
         if (namePartsIndex == 0) {
-            throw new IndexOutOfBoundsException("Name must have a space.");
+            throw new InvalidNameException("Name must have a space.");
         }
         
 
