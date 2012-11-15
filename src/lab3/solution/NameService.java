@@ -1,5 +1,6 @@
-package lab2.solution;
+package lab3.solution;
 
+import lab2.solution.*;
 import lab2.*;
 
 /**
